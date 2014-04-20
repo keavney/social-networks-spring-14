@@ -37,6 +37,6 @@ class FilteredListener(tweepy.StreamListener):
             if d < self.distance:
                 self.action(tweet)
                 self.count += 1
-                if self.count >= self.quantity:
+                if self.quantity > 0 and self.count >= self.quantity:
                     return False
 
