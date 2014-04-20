@@ -11,11 +11,11 @@ class Streamer:
             credentials['access_token_key'], credentials['access_token_secret'])
         self.api = tweepy.API(self.auth)
 
-    def read(self, action, terms, quantity, center, distance):
+    def read(self, action, keywords, quantity, center, distance):
         languages = ['en']
         listener = FilteredListener(self.api, action, quantity, center, distance)
         stream = tweepy.Stream(self.auth, listener)
-        stream.filter(track = terms, languages = languages)
+        stream.filter(track = keywords, languages = languages)
 
 class FilteredListener(tweepy.StreamListener):
     def __init__(self, api, action, quantity, center, distance):
