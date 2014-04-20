@@ -32,11 +32,11 @@ streamer = Streamer(credentials)
 if args.outfile:
     out = open(args.outfile, 'wb')
     writer = csv.writer(out, delimiter=args.delimiter)
-    streamer.read(lambda tweet, user: writer.writerow(
-            ["0", tweet.text.encode('utf-8'), user.followers_count]
-        ), args.keywords, args.quantity, center, distance)
+    streamer.read(
+        lambda tweet, user: writer.writerow(["0", tweet.text.encode('utf-8'), user.followers_count]), 
+        args.keywords, args.quantity, center, distance)
     out.close()
 else:
-    streamer.read(lambda tweet, user: sys.stdout.write(
-            "0"+args.delimiter+tweet.text+args.delimiter+str(user.followers_count)+'\n'
-        ), args.keywords, args.quantity, center, distance)
+    streamer.read(
+        lambda tweet, user: sys.stdout.write("0"+args.delimiter+tweet.text+args.delimiter+str(user.followers_count)+'\n'), 
+        args.keywords, args.quantity, center, distance)
