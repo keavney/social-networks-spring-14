@@ -35,7 +35,8 @@ class FilteredListener(tweepy.StreamListener):
                 self.center["lat"],
                 self.center["long"]))
             if d < self.distance:
-                self.action(tweet)
+                user = self.api.get_user(tweet.user.screen_name)
+                self.action(tweet, user)
                 self.count += 1
                 if self.quantity > 0 and self.count >= self.quantity:
                     return False
