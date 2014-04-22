@@ -41,8 +41,8 @@ ranker = trank.rank.TweetRanker(training_model)
 streamer = Streamer(credentials)
 if args.outfile:
     with open(args.outfile, 'wb') as outfile:
-        action = (lambda tweet, user: outfile.write('('+str(ranker.calculate_tweet_score(tweet.text, user.followers_count)/user.followers_count)+', '+tweet.text.encode('utf-8')+')\n'))
+        action = (lambda tweet, user: outfile.write('('+str(ranker.calculate_tweet_score(tweet.text, user.followers_count))+', '+tweet.text.encode('utf-8')+')\n'))
         streamer.read(action, args.keywords, args.quantity, center, distance)
 else:
-    action = (lambda tweet, user: sys.stdout.write('('+str(ranker.calculate_tweet_score(tweet.text, user.followers_count)/user.followers_count)+', '+tweet.text+')\n'))
+    action = (lambda tweet, user: sys.stdout.write('('+str(ranker.calculate_tweet_score(tweet.text, user.followers_count))+', '+tweet.text+')\n'))
     streamer.read(action, args.keywords, args.quantity, center, distance)

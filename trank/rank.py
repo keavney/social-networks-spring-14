@@ -25,7 +25,11 @@ class TweetRanker:
         record.probability = probability.prob('1')
 
         # Calculate tweet score from provided tweet, user pair
+        # record.impact_score = record.probability * (float(record.followers)+1)
+        
+        #for now, just show the probability
         record.impact_score = record.probability * (float(record.followers)+1)
+        
         return record.impact_score
 
 def tweet_score_is_valid(score):

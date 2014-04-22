@@ -1,0 +1,17 @@
+Social Networks Project
+
+Usage info and options for scripts are provided by running <script> --help
+
+Scripts that use stream data expect a file named "auth" that contains the app's secret keys in a dictionary. Please do not upload this file to the repository.
+
+Normal usage: collect.py > (rank tweets by hand) > rank.py > run-[test|stream].py
+
+Main scripts:
+collect.py: Gather data from the twitter stream using specified keywords. Generates a CSV or outputs to stdout. Default delimiter is '|'. If a quantity is not specified the script will run indefinitely.
+rank.py: Produce a training model with a list of word vectors and a 0/1 classifier. Note that data must be manually ranked by hand (0 not relevant/1 relevant) before generating the model.
+run-test.py: Compare a separate data CSV to the training model and output (score, text) pairs.
+run-stream.py: Gather data from the twitter stream using specified keywords and compare data to the training model in realtime. The keywords used here can be different from the ones used to generate the model.
+
+Support packages:
+tstream: Contains a wrapper class for the stream functionality. streamer.read() takes the stream parameters and a lambda function to be called when each new item appears.
+trank: Contains functions to generate the training model classify new data.
