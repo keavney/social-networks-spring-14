@@ -25,15 +25,15 @@ with open(args.modelfile[0], 'r') as f:
 ranker = trank.rank.TweetRanker(training_model)
 
 # open csv file, rank each tweet, and add to list if it qualifies
-tweets = trank.model.get_record_list_from_csv_filename(args.testfile[0], args.delimiter)
+records = trank.model.get_record_list_from_csv_filename(args.testfile[0], args.delimiter)
 ranked_tweets = []
-for tweet in tweets:
-    text = tweet.message
-    followers = tweet.followers
+for record in records:
+    text = record.message
+    followers = record.followers
     score = ranker.calculate_tweet_score(text, followers)
     if trank.rank.tweet_score_is_valid(score):
         ranked_tweets.append((score, text))
 
 # print out tweets and scores
-for tweet in ranked_tweets:
-    print tweet
+for tweetpair in ranked_tweets:
+    print tweetpair
