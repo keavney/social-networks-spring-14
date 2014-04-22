@@ -28,8 +28,7 @@ class Record:
             else:
                 self.features_set[k] = 0
 
-def create_model_from_csv_filename(csvfilename, delim, min_frequency=3):
-    # Read csv file, create records list
+def get_record_list_from_csv_filename(csvfilename, delim):
     records_list = []
     with open(csvfilename, 'rb') as csvfile:
         for line in csvfile.readlines():
@@ -37,6 +36,11 @@ def create_model_from_csv_filename(csvfilename, delim, min_frequency=3):
             if len(fields) == 3:
                 record = Record(fields[0],fields[1],fields[2])
                 records_list.append(record)
+    return records_list
+
+def create_model_from_csv_filename(csvfilename, delim, min_frequency=3):
+    # Read csv file, create records list
+    records_list = get_record_list_from_csv_filename(csvfilename, delim)
 
     # Get word count from all messages
     word_counts = {}
