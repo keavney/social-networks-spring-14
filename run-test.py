@@ -11,6 +11,8 @@ parser = argparse.ArgumentParser(
     description="Run test data against a training model.")
 parser.add_argument('-d', '--delimiter', default='|',
     help="CSV file delimiter. (Default: |)")
+parser.add_argument('-o', '--outfile',
+    help="File for output. If left blank, data will be output to stdout.")
 parser.add_argument('modelfile', nargs=1,
     help="Training model.")
 parser.add_argument('testfile', nargs=1,
@@ -35,5 +37,10 @@ for record in records:
         ranked_tweets.append((score, text))
 
 # print out tweets and scores
-for tweetpair in ranked_tweets:
-    print tweetpair
+if args.outfile:
+    with open(args.outfile, 'w') as outfile:
+        for tweetpair in ranked_tweets:
+            outfile.write(str(tweetpair))
+else:
+    for tweetpair in ranked_tweets:
+        print tweetpair
